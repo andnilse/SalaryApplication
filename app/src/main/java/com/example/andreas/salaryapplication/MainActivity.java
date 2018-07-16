@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textView, textView2;
+    private TextView textView, textView2, daysView, totalView;
     private int i=0;
     private double salary = 0;
     private int secondsAtWork = (7 * 60 + 30) *60; //27000 seconds in a work day
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 salary = dSalary;
 
             textView2.setText("Daily earnings: "+salary);
+
             textView.postDelayed(this, 1000);
         }
     };
