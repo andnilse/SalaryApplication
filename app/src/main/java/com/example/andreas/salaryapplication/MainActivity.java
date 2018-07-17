@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textView, textView2;
+    private TextView textView, textView2, textView3, textView4;
     private int i=0;
     private double salary = 0;
     private int secondsAtWork = (7 * 60 + 30) *60; //27000 seconds in a work day
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("Hoi");
         textView2 = (TextView)findViewById(R.id.textView2);
         textView2.setText("Hoi");
+        textView3 = (TextView)findViewById(R.id.textView3);
+        textView4 = (TextView)findViewById(R.id.textView4);
 
         textView.postDelayed(runnable, 1000);
     }
@@ -53,6 +56,25 @@ public class MainActivity extends AppCompatActivity {
                 salary = dSalary;
 
             textView2.setText("Daily earnings: "+salary);
+
+            Calendar start = Calendar.getInstance();
+            start.setTime(new Date(2018, 06, 18));
+            Calendar today = Calendar.getInstance();
+            System.out.println(start.getTime().getYear()+" "+(start.get(Calendar.MONTH))+" "+start.get(Calendar.DATE));
+            Date first = new Date(start.getTime().getYear(), (start.get(Calendar.MONTH)), start.get(Calendar.DATE));
+            System.out.println(today.get(Calendar.YEAR)+" "+(today.get(Calendar.MONTH)+1)+" "+today.get(Calendar.DATE));
+            Date last = new Date(today.get(Calendar.YEAR), (today.get(Calendar.MONTH)+1), today.get(Calendar.DATE));
+            long firstMillis = first.getTime();
+            long lastMillis = last.getTime();
+            //System.out.println(firstMillis);
+            //System.out.println(lastMillis);
+            long diff = lastMillis-firstMillis;
+            //System.out.println(diff);
+            long days = diff/(1000*3600*24);
+
+            textView3.setText("Working days: "+days);
+            textView4.setText(""+(days*dSalary+salary));
+
             textView.postDelayed(this, 1000);
         }
     };
