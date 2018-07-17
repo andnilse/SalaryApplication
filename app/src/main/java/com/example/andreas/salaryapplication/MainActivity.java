@@ -58,22 +58,19 @@ public class MainActivity extends AppCompatActivity {
             textView2.setText("Daily earnings: "+salary);
 
             Calendar start = Calendar.getInstance();
-            start.setTime(new Date(2018, 06, 18));
+            start.set(Calendar.YEAR, 2018);
+            start.set(Calendar.MONTH, 6);
+            start.set(Calendar.DATE, 18);
             Calendar today = Calendar.getInstance();
-            System.out.println(start.getTime().getYear()+" "+(start.get(Calendar.MONTH))+" "+start.get(Calendar.DATE));
-            Date first = new Date(start.getTime().getYear(), (start.get(Calendar.MONTH)), start.get(Calendar.DATE));
-            System.out.println(today.get(Calendar.YEAR)+" "+(today.get(Calendar.MONTH)+1)+" "+today.get(Calendar.DATE));
-            Date last = new Date(today.get(Calendar.YEAR), (today.get(Calendar.MONTH)+1), today.get(Calendar.DATE));
-            long firstMillis = first.getTime();
-            long lastMillis = last.getTime();
-            //System.out.println(firstMillis);
-            //System.out.println(lastMillis);
+            today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
+            System.out.println(today);
+            long firstMillis = start.getTimeInMillis();
+            long lastMillis = today.getTimeInMillis();
             long diff = lastMillis-firstMillis;
-            //System.out.println(diff);
             long days = diff/(1000*3600*24);
 
             textView3.setText("Working days: "+days);
-            textView4.setText(""+(days*dSalary+salary));
+            textView4.setText("Total earnings: "+(days*dSalary+salary));
 
             textView.postDelayed(this, 1000);
         }
