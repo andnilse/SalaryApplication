@@ -54,22 +54,32 @@ public class MainActivity extends AppCompatActivity {
 
             textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
-            Calendar start = Calendar.getInstance();
-            start.set(Calendar.YEAR, 2018);
-            start.set(Calendar.MONTH, 6);
-            start.set(Calendar.DATE, 18);
-            Calendar today = Calendar.getInstance();
-            today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
-            System.out.println(today);
-            long firstMillis = start.getTimeInMillis();
-            long lastMillis = today.getTimeInMillis();
-            long diff = lastMillis-firstMillis;
-            long days = diff/(1000*3600*24);
-
+            long days = calcuclateDays();
             textView3.setText("Working days: "+days);
             textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary+salary)));
 
             textView.postDelayed(this, 1000);
         }
     };
+
+    private long calcuclateDays(){
+        Calendar start = Calendar.getInstance();
+        start.set(Calendar.YEAR, 2018);
+        start.set(Calendar.MONTH, 6);
+        start.set(Calendar.DATE, 18);
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
+        System.out.println(today);
+        long firstMillis = start.getTimeInMillis();
+        long lastMillis = today.getTimeInMillis();
+        long diff = lastMillis-firstMillis;
+        long days = diff/(1000*3600*24);
+
+        int initDay = start.get(Calendar.DAY_OF_WEEK);
+        System.out.println(initDay);
+
+        int day = Calendar.DAY_OF_WEEK;
+        System.out.println(day);
+        return days;
+    }
 }
