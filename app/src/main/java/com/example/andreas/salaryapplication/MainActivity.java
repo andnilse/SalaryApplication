@@ -5,16 +5,13 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textView, textView2, textView3, textView4;
-    private int i=0;
     private double salary = 0;
     private int secondsAtWork = (7 * 60 + 30) *60; //27000 seconds in a work day
     private double dSalary = 220*7.5;
     private double secondSalary = dSalary /secondsAtWork;
-    private int initHours, initMinutes, initSeconds;
 
 
     @Override
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             else if (hours>=16)
                 salary = dSalary;
 
-            textView2.setText("Daily earnings: "+salary);
+            textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
             Calendar start = Calendar.getInstance();
             start.set(Calendar.YEAR, 2018);
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             long days = diff/(1000*3600*24);
 
             textView3.setText("Working days: "+days);
-            textView4.setText("Total earnings: "+(days*dSalary+salary));
+            textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary+salary)));
 
             textView.postDelayed(this, 1000);
         }
