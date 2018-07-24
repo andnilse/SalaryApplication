@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     private TextView textView, textView2, textView3, textView4;
     private double salary = 0;
-    private int secondsAtWork = (7 * 60 + 30) *60; //27000 seconds in a work day
+    private int secondsAtWork = (8 * 60 ) *60; //27000 seconds in a work day
     private double dSalary = 220*7.5;
     private double secondSalary = dSalary /secondsAtWork;
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
-            long days = calcuclateDaysNew();
+            long days = calculateDaysNew();
             textView3.setText("Working days: "+days);
             textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary+salary)));
 
