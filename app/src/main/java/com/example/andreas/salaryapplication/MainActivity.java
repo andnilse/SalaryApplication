@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
-            long days = calcuclateDays();
+            long days = calcuclateDaysNew();
             textView3.setText("Working days: "+days);
             textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary+salary)));
 
@@ -81,5 +81,35 @@ public class MainActivity extends AppCompatActivity {
         int day = Calendar.DAY_OF_WEEK;
         System.out.println(day);
         return days;
+    }
+    
+    private int calculateDaysNew(){
+        
+        Calendar start = Calendar.getInstance();
+        start.set(Calendar.YEAR, 2018);
+        start.set(Calendar.MONTH, 6);
+        start.set(Calendar.DATE, 18);
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
+        
+        int initDay = start.get(Calendar.DAY_OF_YEAR);
+        //System.out.println("Initday: "+initDay);
+
+        int day = today.get(Calendar.DAY_OF_YEAR);
+        //System.out.println("Day of week: "+day);
+        int diffDays = day-initDay;
+        //System.out.println("Days: "+ diffDays);
+        
+        int totalWorkingDays = 0;
+        for(int i = 0;i< diffDays; i++){
+        	start.set(Calendar.DAY_OF_YEAR, (initDay+i));
+        	if(start.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && start.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+        		totalWorkingDays++;
+        		//System.out.println(start.get(Calendar.DAY_OF_WEEK));
+        	}
+        	
+        }
+        //System.out.println(totalWorkingDays);
+        return totalWorkingDays;
     }
 }
