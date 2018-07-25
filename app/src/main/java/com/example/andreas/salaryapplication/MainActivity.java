@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             long days = calculateDaysNew();
             textView3.setText("Working days: "+days);
-            textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary+salary)));
+            textView4.setText("Total earnings: "+String.format("%.4f", ((days-1)*dSalary+salary)));
 
             textView.postDelayed(this, 1000);
         }
