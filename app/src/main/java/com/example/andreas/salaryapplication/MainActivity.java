@@ -158,30 +158,30 @@ public class MainActivity extends AppCompatActivity {
     }
     private String getMonth(){
         Calendar cal = Calendar.getInstance();
-        int day = cal.get(Calendar.DAY_OF_WEEK);
-        if(day==1)
+        int month = cal.get(Calendar.MONTH);
+        if(month==Calendar.JANUARY)
             return "January";
-        if(day==2)
+        if(month==Calendar.FEBRUARY)
             return "February";
-        if(day==3)
+        if(month==Calendar.MARCH)
             return "March";
-        if(day==4)
+        if(month==Calendar.APRIL)
             return "April";
-        if(day==5)
+        if(month==Calendar.MAY)
             return "May";
-        if(day==6)
+        if(month==Calendar.JUNE)
             return "June";
-        if(day==7)
+        if(month==Calendar.JULY)
             return "July";
-        if(day==8)
+        if(month==Calendar.AUGUST)
             return "August";
-        if(day==9)
+        if(month==Calendar.SEPTEMBER)
             return "September";
-        if(day==10)
+        if(month==Calendar.OCTOBER)
             return "October";
-        if(day==11)
+        if(month==Calendar.NOVEMBER)
             return "November";
-        if(day==12)
+        if(month==Calendar.DECEMBER)
             return "December";
         return "";
     }
