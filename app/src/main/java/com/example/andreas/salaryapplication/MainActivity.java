@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private int secondsAtWork = (8 * 60 ) *60; //27000 seconds in a work day
     private double dSalary = 220*7.5;
     private double secondSalary = dSalary /secondsAtWork;
-
+    private Calendar start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +40,36 @@ public class MainActivity extends AppCompatActivity {
 
             textView.setText("The time is: "+hours+":"+minutes+":"+seconds);
             //textView2.setText("Daily earnings: "+salary);
-            if(hours<8)
-                salary = 0;
-            else if((hours>=8) && (hours<16)){
-                int diffH = hours-8;
-                int diffM = minutes;
-                int diffS = seconds;
-                int diffSeconds = ((diffH*60) + diffM)*60 + diffS;
-                salary = secondSalary * diffSeconds;
-            }
-            else if (hours>=16)
-                salary = dSalary;
-
-            textView2.setText("Daily earnings: "+String.format("%.4f", salary));
-
             int days = calculateDays();
             textView3.setText("Working days: "+days);
-            textView4.setText("Total earnings: "+String.format("%.4f", ((days-1)*dSalary+salary)));
+
+            if(start.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && start.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY){
+                if(hours<8)
+                    salary = 0;
+                else if((hours>=8) && (hours<16)){
+                    int diffH = hours-8;
+                    int diffM = minutes;
+                    int diffS = seconds;
+                    int diffSeconds = ((diffH*60) + diffM)*60 + diffS;
+                    salary = secondSalary * diffSeconds;
+                }
+                else if (hours>=16)
+                    salary = dSalary;
+
+                textView4.setText("Total earnings: "+String.format("%.4f", ((days-1)*dSalary+salary)));
+
+            }else{
+                salary = 0;
+                textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary)));
+            }
+            textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
             textView.postDelayed(this, 1000);
         }
     };
 
     private int calculateDays(){
-        Calendar start = Calendar.getInstance();
+        start = Calendar.getInstance();
         start.set(2018, 5, 18);//6-1 for juni
         //start.set(Calendar.DAY_OF_WEEK, 2);
         Calendar today = Calendar.getInstance();
