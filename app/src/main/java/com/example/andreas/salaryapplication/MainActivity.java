@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             textView2.setText("Daily earnings: "+String.format("%.4f", salary));
 
-            long days = calculateDaysNew();
+            int days = calculateDays();
             textView3.setText("Working days: "+days);
             textView4.setText("Total earnings: "+String.format("%.4f", ((days-1)*dSalary+salary)));
 
@@ -62,25 +62,33 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private long calcuclateDays(){
+    private int calculateDays(){
         Calendar start = Calendar.getInstance();
-        start.set(Calendar.YEAR, 2018);
-        start.set(Calendar.MONTH, 6);
-        start.set(Calendar.DATE, 18);
+        start.set(2018, 5, 18);//6-1 for juni
+        //start.set(Calendar.DAY_OF_WEEK, 2);
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
-        System.out.println(today);
-        long firstMillis = start.getTimeInMillis();
-        long lastMillis = today.getTimeInMillis();
-        long diff = lastMillis-firstMillis;
-        long days = diff/(1000*3600*24);
+        int diffDays = today.get(Calendar.DAY_OF_YEAR)-start.get(Calendar.DAY_OF_YEAR)+1;
+        System.out.println(diffDays);
+        //start.set(Calendar.DAY_OF_YEAR, (start.get(Calendar.DAY_OF_YEAR)+1));
 
-        int initDay = start.get(Calendar.DAY_OF_WEEK);
-        System.out.println(initDay);
+        String bool = "true";
+        int i = 0, workingDays = 0;
+        int initDay = start.get(Calendar.DAY_OF_YEAR);
+        while(i<diffDays){
+            start.set(Calendar.DAY_OF_YEAR, (initDay+i));
+            bool="true";
+            if(start.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && start.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+                workingDays++;
+                bool="false";
+            }
+            System.out.println("Day of week: "+start.get(Calendar.DAY_OF_WEEK)+" Weekend:"+bool+" working days: "+workingDays+" i: "+i);
+            i++;
+        }
 
-        int day = Calendar.DAY_OF_WEEK;
-        System.out.println(day);
-        return days;
+        System.out.println(diffDays+" "+i+" "+workingDays);
+        System.out.println(Calendar.DAY_OF_WEEK);
+
+        return workingDays;
     }
     
     private int calculateDaysNew(){
@@ -88,28 +96,35 @@ public class MainActivity extends AppCompatActivity {
         Calendar start = Calendar.getInstance();
         start.set(Calendar.YEAR, 2018);
         start.set(Calendar.MONTH, 6);
-        start.set(Calendar.DATE, 18);
+        start.set(Calendar.DAY_OF_MONTH, 18);
         Calendar today = Calendar.getInstance();
         today.set(Calendar.MONTH, ((today.get(Calendar.MONTH))+1));
-        
+        //System.out.println(start.get(Calendar.YEAR)+" "+start.get(Calendar.MONTH)+" "+start.get(Calendar.DAY_OF_MONTH));
+        //System.out.println(today.get(Calendar.YEAR)+" "+today.get(Calendar.MONTH)+" "+today.get(Calendar.DAY_OF_MONTH));
+        System.out.print(today.get(Calendar.DAY_OF_YEAR)-start.get(Calendar.DAY_OF_YEAR));
+
         int initDay = start.get(Calendar.DAY_OF_YEAR);
         //System.out.println("Initday: "+initDay);
 
         int day = today.get(Calendar.DAY_OF_YEAR);
         //System.out.println("Day of week: "+day);
         int diffDays = day-initDay;
-        //System.out.println("Days: "+ diffDays);
+        start.set(Calendar.DAY_OF_WEEK, 2);
+        System.out.println("Days: "+ diffDays);
         
         int totalWorkingDays = 0;
-        for(int i = 0;i< diffDays; i++){
+        for(int i = 0;i<= diffDays; i++){
         	start.set(Calendar.DAY_OF_YEAR, (initDay+i));
         	if(start.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && start.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
+        	    //System.out.println(start.get(Calendar.DAY_OF_WEEK)+" "+ totalWorkingDays);
         		totalWorkingDays++;
         		//System.out.println(start.get(Calendar.DAY_OF_WEEK));
+                System.out.println(start.get(Calendar.DAY_OF_WEEK));
         	}
         	
         }
-        //System.out.println(totalWorkingDays);
+        //while(i<=diffDays)
+        System.out.println(totalWorkingDays);
         return totalWorkingDays;
     }
 }
