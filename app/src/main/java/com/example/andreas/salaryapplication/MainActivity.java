@@ -7,7 +7,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textView, textView2, textView3, textView4;
+    private TextView textView, textView2, textView3, textView4, textView5;
     private double salary = 0;
     private int secondsAtWork = (8 * 60 ) *60; //27000 seconds in a work day
     private double dSalary = 220*7.5;
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         textView2.setText("Hoi");
         textView3 = (TextView)findViewById(R.id.textView3);
         textView4 = (TextView)findViewById(R.id.textView4);
+        textView5 = (TextView)findViewById(R.id.textView5);
 
         textView.postDelayed(runnable, 1000);
     }
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 textView4.setText("Total earnings: "+String.format("%.4f", (days*dSalary)));
             }
             textView2.setText("Daily earnings: "+String.format("%.4f", salary));
+            textView5.setText(getDay()+" "+cal.get(Calendar.DATE)+" "+getMonth()+" "+cal.get(Calendar.YEAR));
+
 
             textView.postDelayed(this, 1000);
         }
@@ -132,5 +135,54 @@ public class MainActivity extends AppCompatActivity {
         //while(i<=diffDays)
         System.out.println(totalWorkingDays);
         return totalWorkingDays;
+    }
+
+    private String getDay(){
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        if(day==1)
+            return "Sunday";
+        if(day==2)
+            return "Monday";
+        if(day==3)
+            return "Thuesday";
+        if(day==4)
+            return "Wednesday";
+        if(day==5)
+            return "Thursday";
+        if(day==6)
+            return "Friday";
+        if(day==7)
+            return "Saturday";
+        return "";
+    }
+    private String getMonth(){
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_WEEK);
+        if(day==1)
+            return "January";
+        if(day==2)
+            return "February";
+        if(day==3)
+            return "March";
+        if(day==4)
+            return "April";
+        if(day==5)
+            return "May";
+        if(day==6)
+            return "June";
+        if(day==7)
+            return "July";
+        if(day==8)
+            return "August";
+        if(day==9)
+            return "September";
+        if(day==10)
+            return "October";
+        if(day==11)
+            return "November";
+        if(day==12)
+            return "December";
+        return "";
     }
 }
